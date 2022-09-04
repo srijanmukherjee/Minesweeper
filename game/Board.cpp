@@ -52,6 +52,8 @@ void Board::Click(sf::Vector2i &position)
     {
         Explode(x, y);
     }
+
+    CheckWin();
 }
 
 void Board::Explode(int start_x, int start_y)
@@ -71,6 +73,7 @@ void Board::Explode(int start_x, int start_y)
         if (m_Cells[idx].IsRevealed() || m_Cells[idx].GetType() == CellType::Mine) continue;
 
         m_Cells[idx].Reveal();
+        m_CellsRevealed++;
 
         if (!initial && m_Cells[idx].GetMineCount() > 0) continue;
 
@@ -90,6 +93,16 @@ void Board::Die()
         cell.Disable();
     }
     m_GameOver = true;
+}
+
+void Board::CheckWin()
+{
+    int total = m_Cells.size();
+    int mineCount = m_MinePercentage * total;
+    if (m_CellsRevealed + mineCount == total) {
+        m_Complete = true;
+        m_GameOver = true;
+    }
 }
 
 std::vector<int> Board::GetRandomIndices(int exclude)
@@ -161,10 +174,13 @@ constexpr int Board::CoordsToIndex(int x, int y) const
 
 bool Board::IsGameOver() const { return m_GameOver; }
 
+bool Board::IsComplete() const { return m_Complete; }
+
 void Board::Reset()
 {
     m_GameOver = false;
     m_Loaded = false;
+    m_CellsRevealed = 0;
     for (auto & cell : m_Cells) {
         cell.Reset();
     }

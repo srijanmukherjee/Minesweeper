@@ -29,6 +29,7 @@ private:
     sf::RectangleShape m_OverlayRect;
     sf::Text m_GameOverText;
     sf::Text m_RestartText;
+    sf::Text m_GameWonText;
 };
 
 

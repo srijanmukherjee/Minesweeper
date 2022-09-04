@@ -18,12 +18,19 @@ Game::Game()
     m_GameOverText.setStyle(sf::Text::Bold);
     m_GameOverText.setPosition(sf::Vector2f(544 / 2.0 - 5 * 16, 181.3f));
 
+    // game over text
+    m_GameWonText.setFont(Asset::font_Roboto);
+    m_GameWonText.setString("You Won");
+    m_GameWonText.setCharacterSize(36);
+    m_GameWonText.setStyle(sf::Text::Bold);
+    m_GameWonText.setPosition(sf::Vector2f(544 / 2.0 - 4 * 18, 181.3f));
+
     // game restart hint text
     m_RestartText.setFont(Asset::font_Roboto);
     m_RestartText.setString("Click anywhere to restart");
     m_RestartText.setCharacterSize(22);
     m_RestartText.setStyle(sf::Text::Italic);
-    m_RestartText.setPosition(sf::Vector2f(544 / 2.0 - 12 * 11, 181.3f + 46));
+    m_RestartText.setPosition(sf::Vector2f(544 / 2.0 - 12 * 11, 181.3f + 50));
 }
 
 void Game::Run()
@@ -78,6 +85,10 @@ void Game::Render()
 void Game::RenderGameOver(sf::RenderWindow &window)
 {
     window.draw(m_OverlayRect);
-    window.draw(m_GameOverText);
+    if (m_Board->IsComplete()) {
+        window.draw(m_GameWonText);
+    } else {
+        window.draw(m_GameOverText);
+    }
     window.draw(m_RestartText);
 }

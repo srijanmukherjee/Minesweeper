@@ -20,6 +20,7 @@ public:
     void Render(sf::RenderWindow &window);
     void Click(sf::Vector2i &position);
     bool IsGameOver() const;
+    bool IsComplete() const;
     void Reset();
 
 private:
@@ -32,6 +33,7 @@ private:
     void IncrementCellEnemyCount(int x, int y);
     constexpr int CoordsToIndex(int x, int y) const;
     bool IsWithinBounds(sf::Vector2i &position) const;
+    void CheckWin();
 
 private:
     int m_Width;
@@ -39,9 +41,11 @@ private:
     int m_Size;
     int m_Rows;
     int m_Cols;
+    int m_CellsRevealed = 0;
     float m_MinePercentage = .1;
-    int m_Loaded = false;
-    int m_GameOver = false;
+    bool m_Loaded = false;
+    bool m_GameOver = false;
+    bool m_Complete = false;
     std::vector<Cell> m_Cells;
 };
 
