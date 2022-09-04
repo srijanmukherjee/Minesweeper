@@ -22,6 +22,7 @@ public:
     CellType GetType() const;
     int GetMineCount() const;
     void SetMineCount(int count);
+    void Reset();
 
 private:
     void UpdateCellColor(sf::RenderWindow &window);

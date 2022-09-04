@@ -30,7 +30,7 @@ void Board::InitializeCells()
 
 void Board::Click(sf::Vector2i &position)
 {
-    if (!IsWithinBounds(position)) return;
+    if (!IsWithinBounds(position) || m_GameOver) return;
 
     int x = position.x / m_Size;
     int y = position.y / m_Size;
@@ -89,6 +89,7 @@ void Board::Die()
             cell.Reveal();
         cell.Disable();
     }
+    m_GameOver = true;
 }
 
 std::vector<int> Board::GetRandomIndices(int exclude)
@@ -156,4 +157,15 @@ void Board::Render(sf::RenderWindow &window)
 constexpr int Board::CoordsToIndex(int x, int y) const
 {
     return y * m_Cols + x;
+}
+
+bool Board::IsGameOver() const { return m_GameOver; }
+
+void Board::Reset()
+{
+    m_GameOver = false;
+    m_Loaded = false;
+    for (auto & cell : m_Cells) {
+        cell.Reset();
+    }
 }

@@ -34,7 +34,6 @@ namespace ColorSchemes {
         const sf::Color backgroundRevealed(0xd7b899ff);
 
     };
-};
-
+}; // namespace ColorSchemes
 
 #endif //MINESWEEPER_CELLMETA_H

@@ -74,6 +74,14 @@ void Cell::Reveal()
         m_Text.setString(sf::String(std::to_string(m_EnemyCount)));
 }
 
+void Cell::Reset()
+{
+    m_Revealed = false;
+    m_Type = CellType::Normal;
+    m_Disabled = false;
+    m_EnemyCount = 0;
+}
+
 bool Cell::IsRevealed() const
 {
     return m_Revealed;

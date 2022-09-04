@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "Board.h"
+#include "Asset.h"
 
 class Game {
 public:
@@ -16,6 +17,7 @@ public:
     void Run();
 
 private:
+    void RenderGameOver(sf::RenderWindow &window);
     void ProcessBoardEvents(sf::Event &event);
     void ProcessEvents();
     void Render();
@@ -24,6 +26,9 @@ private:
 private:
     sf::RenderWindow m_Window;
     std::shared_ptr<Board> m_Board;
+    sf::RectangleShape m_OverlayRect;
+    sf::Text m_GameOverText;
+    sf::Text m_RestartText;
 };
 
 

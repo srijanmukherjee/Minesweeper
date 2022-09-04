@@ -19,6 +19,8 @@ public:
     Board(int width, int height, int size);
     void Render(sf::RenderWindow &window);
     void Click(sf::Vector2i &position);
+    bool IsGameOver() const;
+    void Reset();
 
 private:
     void Die();
@@ -39,6 +41,7 @@ private:
     int m_Cols;
     float m_MinePercentage = .1;
     int m_Loaded = false;
+    int m_GameOver = false;
     std::vector<Cell> m_Cells;
 };
 
