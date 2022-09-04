@@ -8,7 +8,10 @@ Game::Game()
     : m_Window(sf::VideoMode(544, 544), "Sweep the mine", sf::Style::Titlebar | sf::Style::Close),
       m_OverlayRect(sf::Vector2f(544.0f, 544.0f))
 {
-    m_Board = std::make_shared<Board>(544, 544, 32);
+    int width = m_Window.getSize().x;
+    int height = m_Window.getSize().y;
+
+    m_Board = std::make_shared<Board>(width, height, 32);
     m_OverlayRect.setFillColor(sf::Color(0x000000bb));
 
     // game over text
@@ -16,21 +19,21 @@ Game::Game()
     m_GameOverText.setString("Game Over");
     m_GameOverText.setCharacterSize(32);
     m_GameOverText.setStyle(sf::Text::Bold);
-    m_GameOverText.setPosition(sf::Vector2f(544 / 2.0 - 5 * 16, 181.3f));
+    m_GameOverText.setPosition(sf::Vector2f(width / 2.0 - 5 * 16, height / 3.0));
 
-    // game over text
+    // game win text
     m_GameWonText.setFont(Asset::font_Roboto);
     m_GameWonText.setString("You Won");
     m_GameWonText.setCharacterSize(36);
     m_GameWonText.setStyle(sf::Text::Bold);
-    m_GameWonText.setPosition(sf::Vector2f(544 / 2.0 - 4 * 18, 181.3f));
+    m_GameWonText.setPosition(sf::Vector2f(width / 2.0 - 4 * 18, height / 3.0));
 
     // game restart hint text
     m_RestartText.setFont(Asset::font_Roboto);
     m_RestartText.setString("Click anywhere to restart");
     m_RestartText.setCharacterSize(22);
     m_RestartText.setStyle(sf::Text::Italic);
-    m_RestartText.setPosition(sf::Vector2f(544 / 2.0 - 12 * 11, 181.3f + 50));
+    m_RestartText.setPosition(sf::Vector2f(width / 2.0 - 12 * 11, height / 3.0 + 50));
 }
 
 void Game::Run()
