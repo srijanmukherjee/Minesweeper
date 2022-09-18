@@ -181,6 +181,7 @@ void Board::Reset()
     m_GameOver = false;
     m_Loaded = false;
     m_CellsRevealed = 0;
+    m_Complete = false;
     for (auto & cell : m_Cells) {
         cell.Reset();
     }
