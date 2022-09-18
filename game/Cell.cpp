@@ -80,6 +80,7 @@ void Cell::Reset()
     m_Type = CellType::Normal;
     m_Disabled = false;
     m_EnemyCount = 0;
+    m_Text.setString("");
 }
 
 bool Cell::IsRevealed() const
